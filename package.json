@@ -1,0 +1,13 @@
+{
+  "name": "ccwc-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "node src/index.js"
+  }
+}
