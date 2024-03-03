@@ -1,4 +1,4 @@
-const countBytes = require("./countBytes");
+const countBytes = require("../functions/countBytes");
 
 describe("countBytes function", () => {
   it('Should return 10 for "Hello world."', () => {
