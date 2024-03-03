@@ -15,22 +15,7 @@ class CCWC {
   }
 
   #countBytes = require("./functions/countBytes");
-
-  /**
-   * @param {String} fileName
-   */
-  #readFile(fileName) {
-    const fs = require("fs");
-    const path = require("path");
-    const filePath = path.resolve(__dirname, "..", fileName);
-    const fileExists = fs.existsSync(filePath);
-
-    if (!fileExists) {
-      throw new Error("ENOENT: The supplied file does not exist.");
-    }
-
-    return fs.readFileSync(filePath);
-  }
+  #readFile = require("./functions/readFile");
 }
 
 module.exports = CCWC;
