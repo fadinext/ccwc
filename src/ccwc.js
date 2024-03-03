@@ -14,12 +14,7 @@ class CCWC {
     return `${bytesLength}`;
   }
 
-  /**
-   * @param {Buffer} buffer
-   */
-  #countBytes(buffer) {
-    return buffer.byteLength;
-  }
+  #countBytes = require("./functions/countBytes");
 
   /**
    * @param {String} fileName
