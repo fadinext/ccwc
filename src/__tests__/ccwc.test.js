@@ -55,3 +55,30 @@ describe("Option to count number of characters: '-m'", () => {
     expect(success).toBe("136");
   });
 });
+
+describe("Must support more than one option at a time", () => {
+  it("Should support default option (i.e, equivalent to '-c -l -w')", () => {
+    const spy = jest.spyOn(ccwc, "execute");
+    const success = ccwc.execute(["", "", testFilePath]);
+    expect(spy).toHaveBeenCalled();
+    expect(success).toBe(" 3 27 136");
+  });
+
+  it("Should support all options combined '-c -l -w'", () => {
+    const spy = jest.spyOn(ccwc, "execute");
+    const success = ccwc.execute(["", "", "-c", "-l", "-w", testFilePath]);
+    expect(spy).toHaveBeenCalled();
+    expect(success).toBe(" 3 27 136");
+  });
+
+  it("Should support any combination of options", () => {
+    const spy = jest.spyOn(ccwc, "execute");
+    const success_cl = ccwc.execute(["", "", "-c", "-l", testFilePath]);
+    const success_cw = ccwc.execute(["", "", "-c", "-w", testFilePath]);
+    const success_wl = ccwc.execute(["", "", "-w", "-l", testFilePath]);
+    expect(spy).toHaveBeenCalled();
+    expect(success_cl).toBe(" 3 136");
+    expect(success_cw).toBe(" 27 136");
+    expect(success_wl).toBe(" 3 27");
+  });
+});
