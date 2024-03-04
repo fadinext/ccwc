@@ -38,3 +38,11 @@ describe("Option to count number of lines: '-l'", () => {
   });
 });
 
+describe("Option to count number of words: '-w'", () => {
+  it('Should return "27" when called with "-w" and supplied test file', () => {
+    const spy = jest.spyOn(ccwc, "execute");
+    const success = ccwc.execute(["", "", "-w", testFilePath]);
+    expect(spy).toHaveBeenCalled();
+    expect(success).toBe("27");
+  });
+});
