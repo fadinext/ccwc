@@ -46,3 +46,12 @@ describe("Option to count number of words: '-w'", () => {
     expect(success).toBe("27");
   });
 });
+
+describe("Option to count number of characters: '-m'", () => {
+  it('Should return "136" when called with "-m" and supplied test file', () => {
+    const spy = jest.spyOn(ccwc, "execute");
+    const success = ccwc.execute(["", "", "-m", testFilePath]);
+    expect(spy).toHaveBeenCalled();
+    expect(success).toBe("136");
+  });
+});

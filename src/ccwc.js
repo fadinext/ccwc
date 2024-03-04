@@ -21,6 +21,10 @@ class CCWC {
         const numberOfWords = this.#countWords(file);
         result = numberOfWords;
         break;
+      case "-m":
+        const numberOfCharacters = this.#countCharacters(file);
+        result = numberOfCharacters;
+        break;
       default:
         throw new Error(`Invalid option: ${command}`);
     }
@@ -32,6 +36,7 @@ class CCWC {
   #readFile = require("./functions/readFile");
   #countLines = require("./functions/countLines");
   #countWords = require("./functions/countWords")
+  #countCharacters = require("./functions/countCharacters")
 }
 
 module.exports = CCWC;
