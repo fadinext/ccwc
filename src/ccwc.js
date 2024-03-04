@@ -65,6 +65,8 @@ class CCWC {
       result += paddingTab + numberOfCharacters;
     }
 
+    result += ` ${filename}`;
+
     return result;
   }
 

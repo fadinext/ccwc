@@ -25,7 +25,7 @@ describe('Initial implementation with only "-c" option and reading from file', (
     const spy = jest.spyOn(ccwc, "execute");
     const success = ccwc.execute(["", "", "-c", testFilePath]);
     expect(spy).toHaveBeenCalled();
-    expect(success).toBe("136");
+    expect(success).toBe("136" + ` ${testFilePath}`);
   });
 });
 
@@ -34,7 +34,7 @@ describe("Option to count number of lines: '-l'", () => {
     const spy = jest.spyOn(ccwc, "execute");
     const success = ccwc.execute(["", "", "-l", testFilePath]);
     expect(spy).toHaveBeenCalled();
-    expect(success).toBe("3");
+    expect(success).toBe("3" + ` ${testFilePath}`);
   });
 });
 
@@ -43,7 +43,7 @@ describe("Option to count number of words: '-w'", () => {
     const spy = jest.spyOn(ccwc, "execute");
     const success = ccwc.execute(["", "", "-w", testFilePath]);
     expect(spy).toHaveBeenCalled();
-    expect(success).toBe("27");
+    expect(success).toBe("27" + ` ${testFilePath}`);
   });
 });
 
@@ -52,7 +52,7 @@ describe("Option to count number of characters: '-m'", () => {
     const spy = jest.spyOn(ccwc, "execute");
     const success = ccwc.execute(["", "", "-m", testFilePath]);
     expect(spy).toHaveBeenCalled();
-    expect(success).toBe("136");
+    expect(success).toBe("136" + ` ${testFilePath}`);
   });
 });
 
@@ -61,14 +61,14 @@ describe("Must support more than one option at a time", () => {
     const spy = jest.spyOn(ccwc, "execute");
     const success = ccwc.execute(["", "", testFilePath]);
     expect(spy).toHaveBeenCalled();
-    expect(success).toBe(" 3 27 136");
+    expect(success).toBe(" 3 27 136" + ` ${testFilePath}`);
   });
 
   it("Should support all options combined '-c -l -w'", () => {
     const spy = jest.spyOn(ccwc, "execute");
     const success = ccwc.execute(["", "", "-c", "-l", "-w", testFilePath]);
     expect(spy).toHaveBeenCalled();
-    expect(success).toBe(" 3 27 136");
+    expect(success).toBe(" 3 27 136" + ` ${testFilePath}`);
   });
 
   it("Should support any combination of options", () => {
@@ -77,8 +77,8 @@ describe("Must support more than one option at a time", () => {
     const success_cw = ccwc.execute(["", "", "-c", "-w", testFilePath]);
     const success_wl = ccwc.execute(["", "", "-w", "-l", testFilePath]);
     expect(spy).toHaveBeenCalled();
-    expect(success_cl).toBe(" 3 136");
-    expect(success_cw).toBe(" 27 136");
-    expect(success_wl).toBe(" 3 27");
+    expect(success_cl).toBe(" 3 136" + ` ${testFilePath}`);
+    expect(success_cw).toBe(" 27 136" + ` ${testFilePath}`);
+    expect(success_wl).toBe(" 3 27" + ` ${testFilePath}`);
   });
 });
