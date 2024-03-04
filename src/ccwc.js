@@ -1,15 +1,16 @@
 class CCWC {
   /**
    * @param {String[]} argv
+   * @param {String=} stdin
    */
-  execute(argv) {
+  execute(argv, stdin) {
     let showBytes,
       showLines,
       showWords,
       showCharacters = false;
 
     let optionsSupplied = 0;
-
+    let fileNameWasProvided = false;
     let i = 2;
     while (i < argv.length) {
       const command = argv[i];
@@ -35,13 +36,18 @@ class CCWC {
             const x = command;
             throw new Error(`Invalid option: ${x}`);
           }
+          fileNameWasProvided = true;
       }
       i++;
     }
     const isDefault = !showBytes && !showWords && !showLines && !showCharacters;
 
-    const filename = argv[2 + (isDefault ? 0 : optionsSupplied)];
-    const file = this.#readFile(filename);
+    const filename = fileNameWasProvided
+      ? argv[2 + (isDefault ? 0 : optionsSupplied)]
+      : "";
+    const file = fileNameWasProvided
+      ? this.#readFile(filename)
+      : Buffer.from(stdin);
     let result = "";
     const paddingTab = optionsSupplied > 1 || isDefault ? " " : "";
 
@@ -65,7 +71,9 @@ class CCWC {
       result += paddingTab + numberOfCharacters;
     }
 
-    result += ` ${filename}`;
+    if (fileNameWasProvided) {
+      result += ` ${filename}`;
+    }
 
     return result;
   }

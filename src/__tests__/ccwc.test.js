@@ -82,3 +82,13 @@ describe("Must support more than one option at a time", () => {
     expect(success_wl).toBe(" 3 27" + ` ${testFilePath}`);
   });
 });
+
+describe("Read from standard input if no filename is specified", () => {
+  it("Should read from stdin", () => {
+    const spy = jest.spyOn(ccwc, "execute");
+    const success = ccwc.execute(["", "", "-c", "-l", "-w"], "Hello world!");
+    expect(spy).toHaveBeenCalled();
+    expect(success).toBe(" 1 2 12");
+  });
+
+})

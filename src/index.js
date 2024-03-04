@@ -1,6 +1,8 @@
-const argv = process.argv;
+const fs = require("fs");
 
-const CCWC = require("./ccwc")
+const argv = process.argv;
+const stdin = fs.readFileSync(process.stdin.fd, "utf-8");
+const CCWC = require("./ccwc");
 const program = new CCWC();
 
-console.log(program.execute(argv));
+console.log(program.execute(argv, stdin));
