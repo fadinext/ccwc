@@ -33,8 +33,7 @@ class CCWC {
           break;
         default:
           if (command.charAt(0) === "-") {
-            const x = command;
-            throw new Error(`Invalid option: ${x}`);
+            throw new Error(`Invalid option: ${command}`);
           }
           fileNameWasProvided = true;
       }
