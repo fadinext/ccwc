@@ -1,13 +1,17 @@
+const fs = require("fs");
+
 class CCWC {
   /**
    * @param {String[]} argv
    * @param {String=} stdin
    */
-  execute(argv, stdin) {
+  execute(argv) {
     let showBytes,
       showLines,
       showWords,
       showCharacters = false;
+
+
 
     let optionsSupplied = 0;
     let fileNameWasProvided = false;
@@ -46,7 +50,9 @@ class CCWC {
       : "";
     const file = fileNameWasProvided
       ? this.#readFile(filename)
-      : Buffer.from(stdin);
+      : Buffer.from(fs.readFileSync(process.stdin.fd, "utf-8"));
+
+      fs.readFileSync(process.stdin.fd, "utf-8")
     let result = "";
     const paddingTab = optionsSupplied > 1 || isDefault ? " " : "";
 

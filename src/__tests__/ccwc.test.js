@@ -2,6 +2,10 @@ const CCWC = require("../ccwc");
 
 const ccwc = new CCWC();
 
+const mockStdin = require('mock-stdin')
+
+
+
 afterEach(() => {
   jest.restoreAllMocks();
 });
@@ -86,7 +90,20 @@ describe("Must support more than one option at a time", () => {
 describe("Read from standard input if no filename is specified", () => {
   it("Should read from stdin", () => {
     const spy = jest.spyOn(ccwc, "execute");
-    const success = ccwc.execute(["", "", "-c", "-l", "-w"], "Hello world!");
+
+
+    const helper = (...args) => {
+      const stdin = mockStdin.stdin()
+      ccwc.execute(...args)
+      stdin.send("Hello world!")
+      stdin.end()
+    }
+
+    const success = helper(["", "", "-c", "-l", "-w"]);
+
+
+
+
     expect(spy).toHaveBeenCalled();
     expect(success).toBe(" 1 2 12");
   });
